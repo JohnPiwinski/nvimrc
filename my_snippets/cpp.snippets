@@ -1,0 +1,51 @@
+snippet "fi([-0-9]+)t([-0-9]+)" "for loop" r
+for (int i = `!p snip.rv = match.group(1)`; i < `!p snip.rv = match.group(2)`; i ++) {
+	$0
+}
+endsnippet
+
+snippet "fie([-0-9]+)t([-0-9]+)" "for loop" r
+for (int i = `!p snip.rv = match.group(1)`; i <= `!p snip.rv = match.group(2)`; i ++) {
+	$0
+}
+endsnippet
+
+snippet "fj([-0-9]+)t([-0-9]+)" "for loop" r
+for (int j = `!p snip.rv = match.group(1)`; j < `!p snip.rv = match.group(2)`; j ++) {
+	$0
+}
+endsnippet
+
+snippet "fje([-0-9]+)t([-0-9]+)" "for loop" r
+for (int j = `!p snip.rv = match.group(1)`; j <= `!p snip.rv = match.group(2)`; j ++) {
+	$0
+}
+endsnippet
+
+snippet "fk([-0-9]+)t([-0-9]+)" "for loop" r
+for (int k = `!p snip.rv = match.group(1)`; k < `!p snip.rv = match.group(2)`; k ++) {
+	$0
+}
+endsnippet
+
+snippet "fke([-0-9]+)t([-0-9]+)" "for loop" r
+for (int k = `!p snip.rv = match.group(1)`; k <= `!p snip.rv = match.group(2)`; k ++) {
+	$0
+}
+endsnippet
+
+snippet fp "general for loop" 
+for (int $1 = $2; $1 < $3; $1++) {
+	$0
+}
+endsnippet
+
+snippet fm "general for loop" 
+for (int $1 = $2; $1 < $3; $1--) {
+	$0
+}
+endsnippet
+
+snippet as "cout" 
+cout << $0 << endl;
+endsnippet
