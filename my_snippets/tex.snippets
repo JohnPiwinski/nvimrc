@@ -439,6 +439,10 @@ snippet '(?<!\\)(arcsin|arccos|arctan|arccot|arccsc|arcsec|pi|zeta|int)' "ln" rw
 \\`!p snip.rv = match.group(1)`
 endsnippet
 
+context "math()"
+snippet 'fpr([a-z])' "Partial" riA
+\frac{\partial}{\partial `!p snip.rv = match.group(0)`} 
+endsnippet
 
 priority 100
 context "math()"
@@ -581,6 +585,11 @@ snippet cvec "column vector"
 \begin{pmatrix} ${1:x}_${2:1}\\\\ \vdots\\\\ $1_${2:n} \end{pmatrix}
 endsnippet
 
+context "math()"
+snippet Omg "Omega" iA
+\Omega 
+endsnippet
+
 priority 10
 context "math()"
 snippet "bar" "bar" r
@@ -721,6 +730,16 @@ endsnippet
 context "math()"
 snippet dlt "Delta" iA
 \delta 
+endsnippet
+
+context "math()"
+snippet theta "theta" iA
+\theta 
+endsnippet
+
+context "math()"
+snippet tht "theta" iA
+\theta 
 endsnippet
 
 snippet mt "math"
