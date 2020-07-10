@@ -75,7 +75,8 @@ Plug 'scrooloose/nerdtree', { 'on' : 'NERDTreeToggle' }
 " Programming plugins
 Plug 'lervag/vimtex'
 
-Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+Plug 'SirVer/ultisnips', { 'for': ['markdown', 'tex', 'latex'] }
+Plug 'honza/vim-snippets'
 
 let g:UltiSnipsExpandTrigger='<tab>'
 let g:UltiSnipsJumpForwardTrigger='<tab>'
@@ -90,7 +91,7 @@ else
   Plug 'roxma/vim-hug-neovim-rpc'
 endif
 
-Plug 'junegunn/goyo.vim', { 'for': 'markdown' }
+Plug 'junegunn/goyo.vim', { 'for': ['markdown', 'tex', 'latex'] }
 Plug 'vhdirk/vim-cmake'
 Plug 'fatih/vim-go'
 let g:go_version_warning = 0
@@ -120,6 +121,8 @@ let g:airline_theme='monochrome'
 Plug 'tyru/eskk.vim'
 
 Plug 'shougo/neocomplete.vim'
+
+Plug 'sebastianmarkow/deoplete-rust'
 
 call plug#end() " start all the plugins above
 " -----------------------------------------------------------------------------
@@ -219,3 +222,5 @@ inoremap <C-Z> <C-O>u
 inoremap <C-Y> <C-O><C-R>
 
 inoremap <c-s> <Esc>:w<CR>i
+
+set number
