@@ -64,7 +64,6 @@ if has('nvim')
 else
     call plug#begin('~/.vim/plug.vim')
 endif
-
 " Productivity
 Plug 'junegunn/vim-plug'
 Plug 'tpope/vim-surround'
@@ -103,27 +102,18 @@ Plug 'KeitaNakamura/tex-conceal.vim'
 
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 let g:deoplete#enable_at_startup = 1
-
 Plug 'zchee/deoplete-clang'
-
 Plug 'vhdirk/vim-cmake'
-
 Plug 'octol/vim-cpp-enhanced-highlight'
-
 Plug 'vim-scripts/c.vim'
-
 Plug 'vim-airline/vim-airline'
-
 Plug 'vim-airline/vim-airline-themes'
-
 let g:airline_theme='monochrome'
-
 Plug 'tyru/eskk.vim'
-
 Plug 'shougo/neocomplete.vim'
-
 Plug 'sebastianmarkow/deoplete-rust'
-
+Plug 'chiel92/vim-autoformat'
+Plug 'fatih/vim-go'
 call plug#end() " start all the plugins above
 " -----------------------------------------------------------------------------
 "  VIMTEX OPTIONS
@@ -223,4 +213,18 @@ inoremap <C-Y> <C-O><C-R>
 
 inoremap <c-s> <Esc>:w<CR>i
 
+" Autoformat
+au BufWrite * :Autoformat
+
+" Line numbers
 set number
+
+" CTRL-i is next tab
+noremap <C-i> :<C-U>tabnext<CR>
+inoremap <C-i> <C-\><C-N>:tabnext<CR>
+cnoremap <C-i> <C-C>:tabnext<CR>
+" CTRL-k is previous tab
+noremap <C-k> :<C-U>tabprevious<CR>
+inoremap <C-k> <C-\><C-N>:tabprevious<CR>
+cnoremap <C-k> <C-C>:tabprevious<CR>
+
