@@ -114,6 +114,7 @@ Plug 'shougo/neocomplete.vim'
 Plug 'sebastianmarkow/deoplete-rust'
 Plug 'chiel92/vim-autoformat'
 Plug 'fatih/vim-go'
+Plug 'leafgarland/typescript-vim'
 call plug#end() " start all the plugins above
 " -----------------------------------------------------------------------------
 "  VIMTEX OPTIONS
