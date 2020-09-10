@@ -46,11 +46,11 @@ set mouse=a " use mouse for scroll or window size
 
 if has("nvim")
     if empty(glob('~/.config/nvim/autoload/plug.vim'))
-        silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
+        utocmd BufReadPost *.docx :%!pandoc -f docx -t markdown       silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
                     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
         " autocmd VimEnter * PlugInstall
     endif
-else 
+else
     if empty(glob('~/.vim/autoload/plug.vim'))
         silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
                     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -83,11 +83,11 @@ let g:UltiSnipsJumpBackwardTrigger='<c-k>'
 let g:UltiSnipsSnippetDirectories=["UltiSnips", "my_snippets"]
 
 if has('nvim')
-  Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
+    Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
 else
-  Plug 'Shougo/defx.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
+    Plug 'Shougo/defx.nvim'
+    Plug 'roxma/nvim-yarp'
+    Plug 'roxma/vim-hug-neovim-rpc'
 endif
 
 Plug 'junegunn/goyo.vim', { 'for': ['markdown', 'tex', 'latex'] }
@@ -96,13 +96,16 @@ Plug 'fatih/vim-go'
 let g:go_version_warning = 0
 
 Plug 'KeitaNakamura/tex-conceal.vim'
-    set conceallevel=1
-    let g:tex_conceal='abdmg'
-    hi Conceal ctermbg=none
+set conceallevel=1
+let g:tex_conceal='abdmg'
+hi Conceal ctermbg=none
 
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 let g:deoplete#enable_at_startup = 1
 Plug 'zchee/deoplete-clang'
+
+Plug 'deoplete-plugins/deoplete-dictionary'
+
 Plug 'vhdirk/vim-cmake'
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'vim-scripts/c.vim'
@@ -115,6 +118,7 @@ Plug 'sebastianmarkow/deoplete-rust'
 Plug 'chiel92/vim-autoformat'
 Plug 'fatih/vim-go'
 Plug 'leafgarland/typescript-vim'
+Plug 'justinmk/vim-sneak'
 call plug#end() " start all the plugins above
 " -----------------------------------------------------------------------------
 "  VIMTEX OPTIONS
@@ -123,7 +127,7 @@ if has('unix')
     if has('mac')
         let g:vimtex_view_method = "skim"
         let g:vimtex_view_general_viewer
-                \ = '/Applications/Skim.app/Contents/SharedSupport/displayline'
+                    \ = '/Applications/Skim.app/Contents/SharedSupport/displayline'
         let g:vimtex_view_general_options = '-r @line @pdf @tex'
 
         " This adds a callback hook that updates Skim after compilation
@@ -135,14 +139,14 @@ if has('unix')
             let l:tex = expand('%:p')
             let l:cmd = [g:vimtex_view_general_viewer, '-r']
             if !empty(system('pgrep Skim'))
-            call extend(l:cmd, ['-g'])
+                call extend(l:cmd, ['-g'])
             endif
             if has('nvim')
-            call jobstart(l:cmd + [line('.'), l:out, l:tex])
+                call jobstart(l:cmd + [line('.'), l:out, l:tex])
             elseif has('job')
-            call job_start(l:cmd + [line('.'), l:out, l:tex])
+                call job_start(l:cmd + [line('.'), l:out, l:tex])
             else
-            call system(join(l:cmd + [line('.'), shellescape(l:out), shellescape(l:tex)], ' '))
+                call system(join(l:cmd + [line('.'), shellescape(l:out), shellescape(l:tex)], ' '))
             endif
         endfunction
     else
@@ -189,22 +193,31 @@ let g:vimtex_quickfix_latexlog = {
             \}
 
 let g:eskk#dictionary = {
-\ 'path': "~/.skk-jisyo",
-\ 'sorted': 0,
-\ 'encoding': 'utf-8',
-\}
+            \ 'path': "~/.skk-jisyo",
+            \ 'sorted': 0,
+            \ 'encoding': 'utf-8',
+            \}
 
 let g:eskk#large_dictionary = {
-\ 'path': "/usr/share/skk/SKK-JISYO.L",
-\ 'sorted': 1,
-\ 'encoding': 'euc-jp',
-\}
+            \ 'path': "/usr/share/skk/SKK-JISYO.L",
+            \ 'sorted': 1,
+            \ 'encoding': 'euc-jp',
+            \}
+
+setlocal dictionary+=/usr/share/dict/words
+setlocal dictionary+=/usr/share/dict/american-english
+
+call deoplete#custom#source(
+            \ 'dictionary', 'sorters', [])
+
+call deoplete#custom#source(
+            \ 'dictionary', 'min_pattern_length', 4)
 
 setlocal spell
 set spelllang=en_us
 set spellfile=~/.config/nvim/spell/en.utf-8.add
 inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
-inoremap <expr><TAB>  pumvisible() ? "\<C-x><C-o>" : "\<TAB>"
+" inoremap <expr><TAB>  pumvisible() ? "\<C-x><C-o>" : "\<TAB>"
 nnoremap <silent> <C-S> :if expand("%") == ""<CR>browse confirm w<CR>else<CR>confirm w<CR>endif<CR>
 set colorcolumn=0
 nnoremap <C-Z> u
@@ -214,8 +227,14 @@ inoremap <C-Y> <C-O><C-R>
 
 inoremap <c-s> <Esc>:w<CR>i
 
+autocmd BufReadPost *.docx :%!pandoc -f docx -t plain
 " Autoformat
-au BufWrite * :Autoformat
+au BufWrite * :silent Autoformat
+
+"    map f <Plug>Sneak_f
+"    map F <Plug>Sneak_F
+"    map t <Plug>Sneak_t
+"    map T <Plug>Sneak_T
 
 " Line numbers
 set number
@@ -228,4 +247,13 @@ cnoremap <C-i> <C-C>:tabnext<CR>
 noremap <C-k> :<C-U>tabprevious<CR>
 inoremap <C-k> <C-\><C-N>:tabprevious<CR>
 cnoremap <C-k> <C-C>:tabprevious<CR>
+
+function! s:check_back_space() abort "{{{
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~ '\s'
+endfunction"}}}
+inoremap <silent><expr> <TAB>
+            \ pumvisible() ? "\<C-n>" :
+            \ <SID>check_back_space() ? "\<TAB>" :
+            \ deoplete#manual_complete()
 
