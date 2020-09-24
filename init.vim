@@ -119,7 +119,21 @@ Plug 'chiel92/vim-autoformat'
 Plug 'fatih/vim-go'
 Plug 'leafgarland/typescript-vim'
 Plug 'justinmk/vim-sneak'
+Plug 'wikitopian/hardmode'
+Plug 'chrisbra/csv.vim'
 call plug#end() " start all the plugins above
+
+" CSV Options
+
+if exists("did_load_csvfiletype")
+    finish
+endif
+let did_load_csvfiletype=1
+
+augroup filetypedetect
+    au! BufRead,BufNewFile *.csv,*.dat    setfiletype csv
+augroup END
+
 " -----------------------------------------------------------------------------
 "  VIMTEX OPTIONS
 "  ----------------------------------------------------------------------------
@@ -229,7 +243,8 @@ inoremap <c-s> <Esc>:w<CR>i
 
 autocmd BufReadPost *.docx :%!pandoc -f docx -t plain
 " Autoformat
-au BufWrite * :silent Autoformat
+
+noremap <F3> :Autoformat<CR>
 
 "    map f <Plug>Sneak_f
 "    map F <Plug>Sneak_F
@@ -257,3 +272,5 @@ inoremap <silent><expr> <TAB>
             \ <SID>check_back_space() ? "\<TAB>" :
             \ deoplete#manual_complete()
 
+let g:HardMode_level = 'wannabe'
+autocmd VimEnter,BufNewFile,BufReadPost * silent! call HardMode()
