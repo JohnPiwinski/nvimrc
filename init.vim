@@ -90,7 +90,7 @@ else
     Plug 'roxma/vim-hug-neovim-rpc'
 endif
 
-Plug 'junegunn/goyo.vim', { 'for': ['markdown', 'tex', 'latex'] }
+Plug 'junegunn/goyo.vim', { 'for': ['markdown', 'tex', 'latex', 'text'] }
 Plug 'vhdirk/vim-cmake'
 Plug 'fatih/vim-go'
 let g:go_version_warning = 0
@@ -121,7 +121,22 @@ Plug 'leafgarland/typescript-vim'
 Plug 'justinmk/vim-sneak'
 Plug 'wikitopian/hardmode'
 Plug 'chrisbra/csv.vim'
+Plug 'reedes/vim-wordy'
 call plug#end() " start all the plugins above
+
+let g:wordy#ring = [
+  \ 'weak',
+  \ ['being', 'passive-voice', ],
+  \ 'business-jargon',
+  \ 'weasel',
+  \ 'puffery',
+  \ ['problematic', 'redundant', ],
+  \ ['colloquial', 'idiomatic', 'similies', ],
+  \ 'art-jargon',
+  \ ['contractions', 'opinion', 'vague-time', 'said-synonyms', ],
+  \ 'adjectives',
+  \ 'adverbs',
+  \ ]
 
 " CSV Options
 
@@ -274,3 +289,9 @@ inoremap <silent><expr> <TAB>
 
 let g:HardMode_level = 'wannabe'
 autocmd VimEnter,BufNewFile,BufReadPost * silent! call HardMode()
+
+noremap <silent> <F8> :<C-u>NextWordy<cr>
+xnoremap <silent> <F8> :<C-u>NextWordy<cr>
+inoremap <silent> <F8> <C-o>:NextWordy<cr>
+
+" colorscheme reykjavik
