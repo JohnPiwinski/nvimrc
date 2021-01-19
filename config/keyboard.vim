@@ -35,8 +35,8 @@ vnoremap P "*P
 " Tab Management (Yes it's nonstandard but f and t are severely overrated.)
 
 nnoremap th  :tabfirst<CR>
-nnoremap tj  :tabnext<CR>
-nnoremap tk  :tabprev<CR>
+nnoremap tk  :tabnext<CR>
+nnoremap tj  :tabprev<CR>
 nnoremap tl  :tablast<CR>
 nnoremap tt  :tabedit<Space>
 nnoremap tn  :tabnew<Space>
