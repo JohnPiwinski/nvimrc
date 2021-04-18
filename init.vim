@@ -17,3 +17,7 @@ source $HOME/.config/nvim/config/wordy.vim
 source $HOME/.config/nvim/config/zip.vim
 
 source $HOME/.config/nvim/config/keyboard.vim
+
+source $HOME/.config/nvim/config/mathpix.vim
+
+source $HOME/.config/nvim/config/inkscape.vim

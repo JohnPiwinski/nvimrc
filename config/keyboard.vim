@@ -15,10 +15,8 @@ inoremap <c-s> <Esc>:w<CR>i
 " noremap a :<C-U>tabprevious<CR>
 " map d <C-b>H
 " map s L<C-f>H
-map K - 
-map J + 
-map k <C-b>H
-map j L<C-f>H
+map K <C-b>H
+map J L<C-f>H
 map l e
 map h b
 nnoremap <silent> f :set scrolloff=0<CR>VHoL<Esc>:set scrolloff=1<CR>``<C-y>/\%V
@@ -32,6 +30,10 @@ vnoremap Y "*Y
 vnoremap p "*p
 vnoremap P "*P
 
+nnoremap  c "*c
+nnoremap  C "*C
+vnoremap c "*c
+vnoremap c "*C
 " Tab Management (Yes it's nonstandard but f and t are severely overrated.)
 
 nnoremap th  :tabfirst<CR>
@@ -44,4 +46,14 @@ nnoremap tm  :tabm<Space>
 nnoremap td  :tabclose<CR>
 
 map <F3> :Autoformat<CR>
-map <F4> :!wc -l -w -m %<CR>                                              
+map <F4> :!wc -l -w -m %<CR>                                             
+
+" Save files and run build script if applicable
+
+noremap w : call Update_and_build()<CR>
+
+function Update_and_build()
+    update 
+    silent !build.sh
+endfunction
+

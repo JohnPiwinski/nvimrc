@@ -78,4 +78,7 @@ Plug 'vim-pandoc/vim-rmarkdown'
 
 Plug 'jalvesaq/Nvim-R', {'branch': 'stable'}
 
+Plug 'mg979/vim-visual-multi', {'branch': 'master'}
+
+Plug 'conornewton/vim-pandoc-markdown-preview'
 call plug#end() " start all the plugins above
